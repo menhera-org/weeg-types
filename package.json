@@ -1,0 +1,27 @@
+{
+  "name": "weeg-types",
+  "version": "0.1.0",
+  "description": "WebExtensions Experts Groups types library",
+  "main": "dist/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/menhera-org/weeg-types.git"
+  },
+  "keywords": [
+    "weeg"
+  ],
+  "author": "metastable-void",
+  "license": "Apache-2.0",
+  "bugs": {
+    "url": "https://github.com/menhera-org/weeg-types/issues"
+  },
+  "homepage": "https://github.com/menhera-org/weeg-types#readme",
+  "devDependencies": {
+    "typescript": "^5.0.3"
+  },
+  "type": "module",
+  "types": "dist/index.d.ts"
+}
