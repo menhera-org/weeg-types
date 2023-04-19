@@ -23,6 +23,17 @@ export type Int32 = number & { [INT32]: never };
 export const MIN: Int32 = (1 << 31) as Int32;
 export const MAX: Int32 = ~MIN as Int32;
 
+export const Int32 = (value: unknown): Int32 => {
+  if (typeof value == 'bigint') {
+    value = BigInt.asIntN(32, value);
+  }
+  const numberValue = Number(value);
+  if (isNaN(numberValue)) {
+    throw new Error(`Not a number: ${value}`);
+  }
+  return toInt32(numberValue);
+};
+
 /**
  * Test if a value is an Int32. This throws on bigints.
  * @param value The number to test.

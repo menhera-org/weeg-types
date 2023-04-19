@@ -23,3 +23,5 @@ export * as BigInt64 from './BigInt64.js';
 export * as BigUint64 from './BigUint64.js';
 export { SmartSet } from './SmartSet.js';
 export { SetMap } from './SetMap.js';
+export { NullPrototype } from './NullPrototype.js';
+export { FrozenNullPrototype } from './FrozenNullPrototype.js';

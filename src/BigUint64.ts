@@ -23,6 +23,15 @@ export type BigUint64 = bigint & { [BIGUINT64]: never };
 export const MIN: BigUint64 = 0n as BigUint64;
 export const MAX: BigUint64 = BigInt.asUintN(64, -1n) as BigUint64;
 
+export const BigUint64 = (value: unknown): BigUint64 => {
+  const allowedTypes = ['string', 'number', 'bigint', 'boolean'];
+  if (!allowedTypes.includes(typeof value)) {
+    throw new Error(`Invalid type: ${typeof value}`);
+  }
+  const bigintValue = BigInt(value as string | number | bigint | boolean);
+  return toBigUint64(bigintValue);
+};
+
 /**
  * Test if a value is an BigUint64. This throws on numbers.
  * @param value The number to test.
