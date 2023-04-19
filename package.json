@@ -13,7 +13,7 @@
   "keywords": [
     "weeg"
   ],
-  "author": "metastable-void",
+  "author": "WebExtensions Experts Group",
   "license": "Apache-2.0",
   "bugs": {
     "url": "https://github.com/menhera-org/weeg-types/issues"
@@ -22,5 +22,6 @@
   "devDependencies": {
     "typescript": "^5.0.3"
   },
-  "types": "dist/index.d.ts"
+  "types": "dist/index.d.ts",
+  "sideEffects": false
 }
