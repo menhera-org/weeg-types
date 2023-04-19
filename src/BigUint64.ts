@@ -18,43 +18,67 @@
 */
 
 declare const BIGUINT64: unique symbol;
+
+/**
+ * A 64-bit unsigned integer. This effectively extends the bigint type.
+ */
 export type BigUint64 = bigint & { [BIGUINT64]: never };
 
-export const MIN: BigUint64 = 0n as BigUint64;
-export const MAX: BigUint64 = BigInt.asUintN(64, -1n) as BigUint64;
-
-export const BigUint64 = (value: unknown): BigUint64 => {
+export function BigUint64 (value: unknown): BigUint64 {
+  if (new.target != null) {
+    throw new TypeError("Not a constructor");
+  }
   const allowedTypes = ['string', 'number', 'bigint', 'boolean'];
   if (!allowedTypes.includes(typeof value)) {
     throw new Error(`Invalid type: ${typeof value}`);
   }
   const bigintValue = BigInt(value as string | number | bigint | boolean);
-  return toBigUint64(bigintValue);
-};
+  return BigInt.asUintN(64, bigintValue) as BigUint64;
+}
 
-/**
- * Test if a value is an BigUint64. This throws on numbers.
- * @param value The number to test.
- * @returns true if the value is an BigUint64.
- */
-export const isBigUint64 = (value: bigint): value is BigUint64 => toBigUint64(value) === value;
+type _BigUint64 = BigUint64;
 
-/**
- * Converts a value to an BigUint64. This throws on numbers (use BigInt(number)).
- * @param value The number to convert to an BigUint64.
- * @returns the BigUint64 value.
- */
-export const toBigUint64 = (value: bigint): BigUint64 => BigInt.asUintN(64, value) as BigUint64;
+export namespace BigUint64 {
+  /**
+   * Just a type alias for BigUint64.
+   */
+  export type BigUint64 = _BigUint64;
 
-/**
- * Converts a string to an BigUint64.
- * @param value the value to convert to a BigUint64.
- * @returns the converted value.
- */
-export const fromString = (value: string): BigUint64 => {
-  const result = BigInt(value);
-  if (!isBigUint64(result)) {
-    throw new Error(`Invalid BigUint64: ${value}`);
-  }
-  return result;
-};
+  /**
+   * The minimum value (0) of an BigUint64.
+   */
+  export const MIN: BigUint64 = 0n as BigUint64;
+
+  /**
+   * The maximum value (2^64 - 1) of an BigUint64.
+   */
+  export const MAX: BigUint64 = BigInt.asUintN(64, -1n) as BigUint64;
+
+  /**
+   * Test if a value is an BigUint64. Any value can be passed, but only bigint values return true.
+   * @param value The number to test.
+   * @returns true if the value is an BigUint64.
+   */
+  export const isBigUint64 = (value: unknown): value is BigUint64 => typeof value == 'bigint' && BigUint64(value) === value;
+
+  /**
+   * Converts a value to an BigUint64.
+   * @param value The bigint number to convert to an BigUint64.
+   * @returns the BigUint64 value.
+   */
+  export const toBigUint64 = (value: bigint): BigUint64 => BigUint64(value);
+
+  /**
+   * Converts a string to an BigUint64.
+   * @param value the value to convert to a BigUint64.
+   * @returns the converted value.
+   */
+  export const fromString = (value: string): BigUint64 => {
+    const result = BigInt(value);
+    if (!BigUint64.isBigUint64(result)) {
+      throw new Error(`Invalid BigUint64: ${value}`);
+    }
+    return result;
+  };
+}
+

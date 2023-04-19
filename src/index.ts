@@ -17,10 +17,10 @@
   @license
 */
 
-export * as Int32 from './Int32.js';
-export * as Uint32 from './Uint32.js';
-export * as BigInt64 from './BigInt64.js';
-export * as BigUint64 from './BigUint64.js';
+export { Int32 } from './Int32.js';
+export { Uint32 } from './Uint32.js';
+export { BigInt64 } from './BigInt64.js';
+export { BigUint64 } from './BigUint64.js';
 export { SmartSet } from './SmartSet.js';
 export { SetMap } from './SetMap.js';
 export { NullPrototype } from './NullPrototype.js';
